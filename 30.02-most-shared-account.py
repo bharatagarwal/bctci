@@ -9,9 +9,6 @@ We say a username is being shared if it appears in two (or more) connections.
 
 Return the most shared username. In case of a tie, return any of them.
 
-
-
-
 Example 1: connections = [("203.0.113.10", "mike"), ("208.51.100.25", "bob"),
 ("202.0.2.5", "mike"), ("203.0.113.15", "bob2")]
 Output: "mike". User "mike" is connected twice, while other users are
