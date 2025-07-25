@@ -30,15 +30,23 @@ Constraints:
 - All usernames contain only lowercase letters
 """
 
-from collections import Counter
-
 
 def most_shared_account(connections):
-	if len(connections) == 0:
-		return []
+	counter = {}  # faster than dict() initialisation
 
-	counter = Counter([user for address, user in connections])
-	return counter.most_common(1)[0][0]
+	for _, user in connections:
+		if user not in counter:
+			counter[user] = 0
+
+		counter[user] += 1
+
+	most_shared = None
+
+	for user, count in counter.items():
+		if not most_shared or count > counter[most_shared]:
+			most_shared = user
+
+	return most_shared
 
 
 connections = [

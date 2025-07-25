@@ -47,14 +47,13 @@ connections_3 = [
 
 
 def identify_shared_ip(connections):
-	# users_ip_address = defaultdict(list)
-	users = set()
+	seen = set()
 
 	for address, username in connections:
-		if username not in users:
-			users.add(username)
-		else:
+		if username in seen:
 			return address
+
+		seen.add(username)
 
 	return ""
 
