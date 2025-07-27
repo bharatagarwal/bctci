@@ -1,0 +1,42 @@
+Dynamic Arrays: 
+	6 pages, 2 problems
+String Manipulation: 
+	6 pages, 3 problems
+Two Pointers: 
+	18 pages, 18 problems
+Grids & Matrices: 
+	14 pages, 8 problems
+Binary Search: 
+	19 pages, 12 problems
+Sets & Maps: 
+	16 pages, 11 problems
+Stack & Queues:
+	13 pages, 8 problems
+Recursion: 
+	20 pages, 5 problems
+Sorting: 
+	18 pages, 6 problems
+Linked Lists: 
+	17 pages, 14 problems
+Trees: 
+	27 pages, 17 problems
+Graphs: 
+	31 pages, 17 problems
+
+Heaps: 
+	20 pages, 8 problems
+Sliding Windows: 
+	28 pages, 23 problems
+Backtracking: 
+	27 pages, 11 problems
+Topological Sort: 
+	13 pages, 8 problems
+Prefix Sums: 
+	14 pages, 10 problems
+Dynamic programming: 
+	20 pages, 8 problems
+Greedy Algorithms: 
+	13 pages, 6 problems
+
+Set & Map Implementations: 
+	23 pages, 6 problems
