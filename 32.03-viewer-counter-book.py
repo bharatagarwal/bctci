@@ -71,7 +71,7 @@ class ViewerCounter:
 		start = timestamp - self.window
 		queue = self.queues[type]
 
-		# prune queue at every enquiry
+		# prune queue from behind would require using something other than an array.
 		while not queue.is_empty() and queue.peek() < start:
 			queue.dequeue()
 
