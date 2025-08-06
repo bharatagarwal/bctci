@@ -59,6 +59,56 @@ The deepest node in the tree which is a non-strict ancestor of both.
 
 """
 
+
+def lowest_common_ancestor(node_1, node_2):
+    n1_ancestors = []
+    n2_ancestors = []
+
+    while node_1:
+        n1_ancestors.append(node_1.id)
+        node_1 = node_1.parent
+
+    while node_2:
+        n2_ancestors.append(node_2.id)
+        node_2 = node_2.parent
+
+    n1_ancestors.reverse()
+    n2_ancestors.reverse()
+
+    ancestor = None
+    for index in range(min(len(n1_ancestors), len(n2_ancestors))):
+        if n1_ancestors[index] == n2_ancestors[index]:
+            ancestor = n1_ancestors[index]
+
+    return ancestor
+
+
+"""
+Given two non-null nodes from the same tree, return the distance between them. 
+
+The sequence of edges between two nodes is called a path, and the number of edges in the path is the distance between the two nodes. 
+
+Note that, in a binary tree, the path between any two nodes is unique.
+"""
+
+
+def distance_between_nodes(node1, node2):
+    lca = lowest_common_ancestor(node1, node2)
+    # path: node1 -> lca -> node2
+
+    distance = 0
+
+    while node1.id != lca:
+        node1 = node1.parent
+        distance += 1
+
+    while node2.id != lca:
+        node2 = node2.parent
+        distance += 1
+
+    return distance
+
+
 # Set up test tree structure:
 #         1 (root)
 #        / \
@@ -88,3 +138,8 @@ print(ancestors(node_4))
 print(depth(node_2))
 print(depth(node_4))
 print(depth(root))
+
+
+print(lowest_common_ancestor(node_5, node_3))  # => 3
+print(lowest_common_ancestor(node_6, node_4))  # => 1
+print(distance_between_nodes(node_4, node_6))
