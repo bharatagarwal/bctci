@@ -1,90 +1,269 @@
+import pytest
+
+
 class Node:
+    """Node for a binary tree, with val and optional left/right"""
+
     def __init__(
         self,
-        id,
-        parent,
+        val,
         left=None,
         right=None,
     ):
-        self.id = id
-        self.parent = parent
+        self.val = val
         self.left = left
         self.right = right
 
 
-# Given a non-null node in the tree, node, which might or might not be the root, implement the following functions:
-
-# a. return whether it is the root
-
-
-def is_root(node):
-    return not node.parent
+# Given a pointer to a specific node in a tree, node, that # - might be null
+# - might be root
 
 
-# b. return the id of its ancestors as an array
+# a. return whether it is a leaf
 
 
-def ancestors(node):
-    result = []
+def if_leaf(node):
+    if not node:
+        return False
 
-    def recursive(node):
-        if not node.parent:
-            return []
-        else:
-            result.append(node.parent.id)
-            recursive(node.parent)
+    if node.left or node.right:
+        return False
 
-            return result
-
-    return recursive(node)
+    return True
 
 
-# c. Return the depth of the node
+# b. return the values of its children as an array of at-most 2
 
 
-def depth(node):
-    return len(ancestors(node))
+def children(node):
+    if not node:
+        return []
+
+    values = []
+
+    # if node.left:
+    #     values.append(node.left.val)
+
+    # if node.right:
+    #     values.append(node.right.val)
+
+    for child in [node.left, node.right]:
+        if child:
+            values.append(child.val)
+
+    return values
 
 
-"""
- d. 
- Given two non-null nodes from the same tree, 
-    node1 and node2, 
+# c. return the values of its grandchildren as an array of length at most 4.
+def grandchildren(node):
+    if not node:
+        return []
 
-return the ID of their lowest common ancestor. 
+    values = []
 
-The deepest node in the tree which is a non-strict ancestor of both.
+    # if node.left:
+    #     if node.left.left:
+    #         values.append(node.left.left.val)
 
-'Non-strict' means that a node is considered its own ancestor. For instance, in Figure 4, LCA(j, f) = f.
+    #     if node.left.right:
+    #         values.append(node.left.right.val)
 
-"""
+    # if node.right:
+    #     if node.right.left:
+    #         values.append(node.right.left.val)
 
-# Set up test tree structure:
-#         1 (root)
-#        / \
-#       2   3
-#      /   / \
-#     4   5   6
+    #     if node.right.right:
+    #         values.append(node.right.right.val)
 
-root = Node(1, None)
-node_2 = Node(2, root)
-node_3 = Node(3, root)
-node_4 = Node(4, node_2)
-node_5 = Node(5, node_3)
-node_6 = Node(6, node_3)
+    for child in [node.left, node.right]:
+        if child:
+            for grandchild in [child.left, child.right]:
+                if grandchild:
+                    values.append(grandchild.val)
 
-# Set up the tree connections
-root.left = node_2
-root.right = node_3
-node_2.left = node_4
-node_3.left = node_5
-node_3.right = node_6
+    return values
 
-print(is_root(root))
-print(is_root(node_2))
 
-print(ancestors(node_6))
-print(ancestors(node_4))
-print(depth(node_2))
-print(depth(node_4))
-print(depth(root))
+# d. return the size of the node's subtree.
+# A node's subtree includes itself and all of its descendants.
+# The size of a tree is the number of nodes present in the tree.
+def size(node):
+    if not node:
+        return 0
+
+    return 1 + size(node.left) + size(node.right)
+
+
+partial = Node(
+    1,
+    Node(
+        2,
+        Node(4, Node(5)),
+        None,
+    ),
+    Node(3, None, Node(7)),
+)
+
+print(size(partial))
+
+
+# e. Return the height of its subtree.
+def height(node):
+    if not node:
+        return 0
+
+    return max(
+        height(node.left) + 1,
+        height(node.right) + 1,
+    )
+
+
+def test_if_leaf():
+    # Test null node
+    result = if_leaf(None)
+    expected = False
+    print(f"if_leaf(None) = {result}, expected = {expected}")
+    assert result == expected
+
+    # Test leaf node
+    leaf = Node(1)
+    result = if_leaf(leaf)
+    expected = True
+    print(f"if_leaf(leaf node) = {result}, expected = {expected}")
+    assert result == expected
+
+    # Test node with only left child
+    node_left = Node(2, Node(3))
+    result = if_leaf(node_left)
+    expected = False
+    print(
+        f"if_leaf(node with left child) = {result}, expected = {expected}"
+    )
+    assert result == expected
+
+    # Test node with only right child
+    node_right = Node(4, None, Node(5))
+    result = if_leaf(node_right)
+    expected = False
+    print(
+        f"if_leaf(node with right child) = {result}, expected = {expected}"
+    )
+    assert result == expected
+
+    # Test node with both children
+    node_both = Node(6, Node(7), Node(8))
+    result = if_leaf(node_both)
+    expected = False
+    print(
+        f"if_leaf(node with both children) = {result}, expected = {expected}"
+    )
+    assert result == expected
+
+
+def test_children():
+    # Test null node
+    result = children(None)
+    expected = []
+    print(f"children(None) = {result}, expected = {expected}")
+    assert result == expected
+
+    # Test leaf node
+    leaf = Node(1)
+    result = children(leaf)
+    expected = []
+    print(f"children(leaf node) = {result}, expected = {expected}")
+    assert result == expected
+
+    # Test node with only left child
+    node_left = Node(2, Node(3))
+    result = children(node_left)
+    expected = [3]
+    print(
+        f"children(node with left child) = {result}, expected = {expected}"
+    )
+    assert result == expected
+
+    # Test node with only right child
+    node_right = Node(4, None, Node(5))
+    result = children(node_right)
+    expected = [5]
+    print(
+        f"children(node with right child) = {result}, expected = {expected}"
+    )
+    assert result == expected
+
+    # Test node with both children
+    node_both = Node(6, Node(7), Node(8))
+    result = children(node_both)
+    expected = [7, 8]
+    print(
+        f"children(node with both children) = {result}, expected = {expected}"
+    )
+    assert result == expected
+
+
+def test_grandchildren():
+    # Test null node
+    result = grandchildren(None)
+    expected = []
+    print(f"grandchildren(None) = {result}, expected = {expected}")
+    assert result == expected
+
+    # Test leaf node
+    leaf = Node(1)
+    result = grandchildren(leaf)
+    expected = []
+    print(f"grandchildren(leaf node) = {result}, expected = {expected}")
+    assert result == expected
+
+    # Test node with children but no grandchildren
+    node_no_grandchildren = Node(1, Node(2), Node(3))
+    result = grandchildren(node_no_grandchildren)
+    expected = []
+    print(
+        f"grandchildren(node with children but no grandchildren) = {result}, expected = {expected}"
+    )
+    assert result == expected
+
+    # Test node with left child having children
+    node_left_grandchildren = Node(1, Node(2, Node(4), Node(5)))
+    result = grandchildren(node_left_grandchildren)
+    expected = [4, 5]
+    print(
+        f"grandchildren(node with left child having children) = {result}, expected = {expected}"
+    )
+    assert result == expected
+
+    # Test node with right child having children
+    node_right_grandchildren = Node(1, None, Node(3, Node(6), Node(7)))
+    result = grandchildren(node_right_grandchildren)
+    expected = [6, 7]
+    print(
+        f"grandchildren(node with right child having children) = {result}, expected = {expected}"
+    )
+    assert result == expected
+
+    # Test node with both children having children
+    root = Node(1, Node(2, Node(4), Node(5)), Node(3, Node(6), Node(7)))
+    result = grandchildren(root)
+    expected = [4, 5, 6, 7]
+    print(
+        f"grandchildren(node with both children having children) = {result}, expected = {expected}"
+    )
+    assert result == expected
+
+    # Test node with partial grandchildren
+    partial = Node(1, Node(2, Node(4), None), Node(3, None, Node(7)))
+    result = grandchildren(partial)
+    expected = [4, 7]
+    print(
+        f"grandchildren(node with partial grandchildren) = {result}, expected = {expected}"
+    )
+    assert result == expected
+
+
+if __name__ == "__main__":
+    test_if_leaf()
+    test_children()
+    test_grandchildren()
+    print("All tests passed!")
