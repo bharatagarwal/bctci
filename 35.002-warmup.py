@@ -1,6 +1,3 @@
-import pytest
-
-
 class Node:
     """Node for a binary tree, with val and optional left/right"""
 
