@@ -22,7 +22,6 @@ Given a binary tree, we say a node is aligned if its value is the same as its de
        2     8    2      :2
      4  3        3  3    :3
 .
-"""
 
             7
         3
@@ -30,7 +29,6 @@ Given a binary tree, we say a node is aligned if its value is the same as its de
   4   3
 
 
-"""
      1    : 1
   2    8  : 2
  4 3      : 3
@@ -63,13 +61,13 @@ if both left and right are not aligned, break chain
 
 def longest_aligned_chain(root):
     result = 0
-    
+
     def visit(node, depth):
         nonlocal result
 
         if not node:
             # zero base case as opposed to just 'return' to # account for return value of outer method
-            return 0 
+            return 0
 
         # postorder traversal
         # post in context of root
