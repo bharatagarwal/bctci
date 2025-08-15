@@ -3,3 +3,4 @@ draw/
 .DS_Store
 .bundle
 ~$Problem List.xlsx
+*.pdf

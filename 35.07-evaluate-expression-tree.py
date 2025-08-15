@@ -6,7 +6,9 @@ We are given the root of a tree representing an arithmetic expression.
 The node definition has three fields: kind, num, and children.
 
 The kind field determines the node's type. There are 'Number' nodes, which have kind = "num", and 'Operation' nodes, where kind is one of "sum", "product", "max", or "min".
+
 The num field is only valid for 'Number' nodes. It stores an integer value.
+
 The children field is only valid for 'Operation' nodes. It stores a list of child nodes (there are no null children).
 This is not a binary tree, as nodes can have more than two children. We call this an N-ary tree.
 

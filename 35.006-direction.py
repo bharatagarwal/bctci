@@ -1,15 +1,15 @@
 """
-down the tree
-    - looking for a value, of current node depth
-    - parameter of recursive function
+a value we're looking for, or the current node's depth:
+    - down the tree
+    - parameters of recursive function
 
-up the tree
-    - information about the subtree, like size or height or sum
+information about the subtree, like size or height or sum
+    - up the tree
     - return value of recursive function
 
-global state
-    - storing node values
-    - variable visible for every recursive call
+storing node values
+    - global state
+    - variable visible in every recursive call
 """
 
 
