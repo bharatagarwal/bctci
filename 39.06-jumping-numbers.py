@@ -1,5 +1,6 @@
-from ucb import log, trace
 import logging
+
+from ucb import log, trace
 
 """
 # Jumping Numbers

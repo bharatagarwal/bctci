@@ -48,8 +48,6 @@ def unique(array):
         cur.update([array[index]])
         visit(index + 1)
         cur.subtract([array[index]])
-        if not cur[array[index]]:
-            del cur[array[index]]
         visit(index + 1)
 
     visit(0)
