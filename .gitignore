@@ -5,3 +5,7 @@ draw/
 ~$Problem List.xlsx
 *.pdf
 venv
+ucb.py
+requirements.txt
+dfs_comparison.md
+.vscode
