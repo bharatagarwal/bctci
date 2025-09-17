@@ -49,15 +49,10 @@ Constraints:
 
 import math
 
-import snoop
-
-# Configure snoop to not show timestamps or elapsed times
-snoop.install(columns=[])
 
 def min_split(array, k):
     n = len(array)
 
-    @snoop
     def min_split_rec(i, x):
         if x == 1:
             return sum(array[i:])
