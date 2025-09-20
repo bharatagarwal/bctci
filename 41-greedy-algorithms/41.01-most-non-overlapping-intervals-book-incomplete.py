@@ -21,7 +21,6 @@ import math
 
 def most_non_overlapping_intervals(intervals):
     intervals.sort(key=lambda x: x[1])
-    breakpoint()
     count = 0
     prev_end = -math.inf
 
@@ -37,10 +36,10 @@ intervals = [[2, 3], [1, 4], [2, 3], [3, 6], [8, 9]]
 print(most_non_overlapping_intervals(intervals))
 # =>  2, [2, 3] and [8, 9]
 
-# intervals = [[1, 2], [2, 3], [3, 4]]
-# print(most_non_overlapping_intervals(intervals))
+intervals = [[1, 2], [2, 3], [3, 4]]
+print(most_non_overlapping_intervals(intervals))
 # =>  2, [1, 2] and [3, 4]
 
-# intervals = [[1, 10], [8, 9], [2, 3]]
-# print(most_non_overlapping_intervals(intervals))
+intervals = [[1, 10], [8, 9], [2, 3]]
+print(most_non_overlapping_intervals(intervals))
 # =>  2, [2, 3] and [8, 9]
